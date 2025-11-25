@@ -1,0 +1,60 @@
+"use client";
+
+import React, { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { darkPalette, lightPalette, typography, components } from '@/theme'; // Import palettes, typography, and components
+
+// Define the shape of the context value
+interface ThemeContextType {
+  toggleColorMode: () => void;
+  mode: 'light' | 'dark';
+}
+
+// Create the context with a default undefined value
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+// Define the props for the ThemeContextProvider
+interface ThemeContextProviderProps {
+  children: ReactNode;
+}
+
+export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
+  const [mode, setMode] = useState<'light' | 'dark'>('dark'); // Default to dark mode
+
+  const toggleColorMode = React.useCallback(() => {
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  }, []);
+
+  // Create a theme based on the current mode
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+          ...(mode === 'light' ? lightPalette : darkPalette), // Use imported palettes
+        },
+        typography, // Use imported typography
+        components, // Use imported components
+      }),
+    [mode],
+  );
+
+  return (
+    <ThemeContext.Provider value={{ toggleColorMode, mode }}>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MuiThemeProvider>
+    </ThemeContext.Provider>
+  );
+}
+
+// Custom hook to use the theme context
+export function useThemeContext() {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useThemeContext must be used within a ThemeContextProvider');
+  }
+  return context;
+}

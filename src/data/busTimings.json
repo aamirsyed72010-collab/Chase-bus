@@ -1,0 +1,47 @@
+{
+  "routes": [
+    {
+      "routeName": "Route 1",
+      "from": "Bhuvanagiri Bus Stand",
+      "to": "Chidambaram",
+      "timings": [
+        "07:00 AM",
+        "08:30 AM",
+        "10:00 AM",
+        "11:30 AM",
+        "01:00 PM",
+        "02:30 PM",
+        "04:00 PM",
+        "05:30 PM"
+      ]
+    },
+    {
+      "routeName": "Route 2",
+      "from": "Bhuvanagiri Bus Stand",
+      "to": "Cuddalore",
+      "timings": [
+        "06:30 AM",
+        "08:00 AM",
+        "09:30 AM",
+        "11:00 AM",
+        "12:30 PM",
+        "02:00 PM",
+        "03:30 PM",
+        "05:00 PM"
+      ]
+    },
+    {
+      "routeName": "Route 3",
+      "from": "Bhuvanagiri Bus Stand",
+      "to": "Vadalur",
+      "timings": [
+        "07:15 AM",
+        "09:15 AM",
+        "11:15 AM",
+        "01:15 PM",
+        "03:15 PM",
+        "05:15 PM"
+      ]
+    }
+  ]
+}
