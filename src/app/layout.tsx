@@ -8,6 +8,7 @@ import i18n from '@/i18n/config';
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeContextProvider } from "@/context/ThemeContext";
 import Script from "next/script"; // Import Script from next/script
+import LiquidBackground from "@/components/LiquidBackground";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,7 +36,11 @@ export default function RootLayout({
       >
         <ThemeContextProvider>
           <I18nextProvider i18n={i18n}>
-            <AuthProvider>{children}</AuthProvider>
+            <AuthProvider>
+              <LiquidBackground>
+                {children}
+              </LiquidBackground>
+            </AuthProvider>
           </I18nextProvider>
         </ThemeContextProvider>
       </body>

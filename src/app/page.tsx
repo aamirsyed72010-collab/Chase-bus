@@ -115,7 +115,7 @@ export default function Home() {
   }
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: 'background.default', minHeight: '100vh' }}>
+    <Box sx={{ flexGrow: 1, minHeight: '100vh' }}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
@@ -173,7 +173,6 @@ export default function Home() {
                   width: '100%', 
                   borderRadius: '24px', 
                   overflow: 'hidden',
-                  bgcolor: 'surface.variant'
                 }}
               >
                 <ClientOnly>

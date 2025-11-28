@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-
 import L from 'leaflet';
 import { useEffect } from 'react';
 import 'leaflet/dist/leaflet.css';
+import { useTheme } from '@mui/material';
 
 // Fix for default icon issue with webpack
 L.Icon.Default.mergeOptions({
@@ -24,6 +25,8 @@ interface MapProps {
 
 function MapContent({ userLocation, routes }: MapProps) {
   const map = useMap();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
 
   useEffect(() => {
     if (userLocation) {
@@ -39,6 +42,11 @@ function MapContent({ userLocation, routes }: MapProps) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
+      <style jsx global>{`
+        .leaflet-tile {
+          filter: ${isDark ? 'invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%)' : 'none'};
+        }
+      `}</style>
       <Marker position={position}>
         <Popup>
           Bhuvanagiri, Tamil Nadu 608601

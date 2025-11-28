@@ -1,14 +1,14 @@
 "use client";
 
 import React, { createContext, useContext, useState, useMemo, ReactNode } from 'react';
-import { createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider as MuiThemeProvider, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { darkPalette, lightPalette, typography, components } from '@/theme'; // Import palettes, typography, and components
 
 // Define the shape of the context value
 interface ThemeContextType {
   toggleColorMode: () => void;
-  mode: 'light' | 'dark';
+  mode: PaletteMode;
 }
 
 // Create the context with a default undefined value
@@ -20,7 +20,7 @@ interface ThemeContextProviderProps {
 }
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
-  const [mode, setMode] = useState<'light' | 'dark'>('dark'); // Default to dark mode
+  const [mode, setMode] = useState<PaletteMode>('dark'); // Default to dark mode
 
   const toggleColorMode = React.useCallback(() => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
@@ -31,7 +31,6 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
     () =>
       createTheme({
         palette: {
-          mode,
           ...(mode === 'light' ? lightPalette : darkPalette), // Use imported palettes
         },
         typography, // Use imported typography

@@ -7,7 +7,14 @@ export default function Footer() {
   // const { t } = useTranslation(); // t is currently unused
 
   return (
-    <Box component="footer" sx={{ py: 3, px: 2, mt: 'auto', backgroundColor: (theme) => theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[800] }}>
+    <Box component="footer" sx={{ 
+      py: 3, 
+      px: 2, 
+      mt: 'auto', 
+      backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+      borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+    }}>
       <Container maxWidth="lg">
         <Typography variant="body1" align="center">
           Bus Tracker App

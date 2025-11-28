@@ -3,7 +3,9 @@
 // Material Design 3 (Material You) Color Tokens
 // Generated or approximated for a purple-based theme
 
-export const darkPalette = {
+import { PaletteOptions } from '@mui/material/styles';
+
+export const darkPalette: PaletteOptions = {
   mode: 'dark',
   primary: {
     main: '#D0BCFF',
@@ -33,10 +35,6 @@ export const darkPalette = {
     default: '#141218',
     paper: '#1D1B20',
   },
-  surface: {
-    main: '#1D1B20',
-    variant: '#49454F',
-  },
   text: {
     primary: '#E6E1E5',
     secondary: '#CAC4D0',
@@ -44,7 +42,16 @@ export const darkPalette = {
   divider: '#49454F',
 };
 
-export const lightPalette = {
+declare module '@mui/material/styles' {
+  interface Palette {
+    tertiary: Palette['primary'];
+  }
+  interface PaletteOptions {
+    tertiary?: PaletteOptions['primary'];
+  }
+}
+
+export const lightPalette: PaletteOptions = {
   mode: 'light',
   primary: {
     main: '#6750A4',
@@ -72,7 +79,7 @@ export const lightPalette = {
   },
   background: {
     default: '#FFFBFE',
-    paper: '#FFFBFE', // Surface color in MD3 is often same as background or slightly tinted
+    paper: '#FFFBFE',
   },
   text: {
     primary: '#1C1B1F',
@@ -138,44 +145,71 @@ export const components = {
   MuiAppBar: {
     styleOverrides: {
       root: {
-        backgroundColor: 'transparent', // Transparent for dynamic color or surface color
+        backgroundColor: 'rgba(255, 255, 255, 0.01)', // Ultra transparent
+        backdropFilter: 'blur(12px)',
         color: 'inherit',
         boxShadow: 'none',
-        backgroundImage: 'none', // Remove default gradient
+        backgroundImage: 'none',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
       },
     },
   },
   MuiButton: {
     styleOverrides: {
       root: {
-        borderRadius: '20px', // Pill shape
+        borderRadius: '24px', // Pill shape
         padding: '10px 24px',
+        textTransform: 'none',
+        fontWeight: 600,
       },
       contained: {
-        boxShadow: 'none',
+        boxShadow: '0 4px 14px 0 rgba(0,0,0,0.1)',
         '&:hover': {
-          boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)',
+          boxShadow: '0 6px 20px rgba(0,0,0,0.23)',
+          transform: 'translateY(-1px)',
         },
+        transition: 'all 0.2s ease-in-out',
       },
     },
   },
   MuiCard: {
     styleOverrides: {
       root: {
-        borderRadius: '12px', // Medium shape
-        boxShadow: 'none', // Use tonal elevation (background color)
-        // backgroundColor is handled by palette.background.paper
-        border: '1px solid transparent', // Optional: for outline variant
+        borderRadius: '24px',
+        backdropFilter: 'blur(16px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.05)', // Glassy
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        backgroundImage: 'none',
+        transition: 'all 0.3s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-5px)',
+          boxShadow: '0 12px 40px 0 rgba(31, 38, 135, 0.15)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+        },
       },
     },
   },
   MuiPaper: {
     styleOverrides: {
       root: {
-        backgroundImage: 'none', // Disable overlay for dark mode
+        backgroundImage: 'none',
+        backdropFilter: 'blur(16px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.05)', // Glassy
+        border: '1px solid rgba(255, 255, 255, 0.05)',
+        transition: 'all 0.3s ease-in-out',
       },
       rounded: {
-        borderRadius: '12px',
+        borderRadius: '24px',
+      },
+      elevation1: {
+        boxShadow: '0 4px 16px 0 rgba(31, 38, 135, 0.05)',
+      },
+      elevation2: {
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+      },
+      elevation3: {
+        boxShadow: '0 12px 48px 0 rgba(31, 38, 135, 0.1)',
       },
     },
   },
@@ -183,7 +217,14 @@ export const components = {
     styleOverrides: {
       root: {
         '& .MuiOutlinedInput-root': {
-          borderRadius: '4px', // Small shape for text fields
+          borderRadius: '16px',
+          backgroundColor: 'rgba(255, 255, 255, 0.03)',
+          '& fieldset': {
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+          },
+          '&:hover fieldset': {
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+          },
         },
       },
     },
@@ -191,14 +232,27 @@ export const components = {
   MuiChip: {
     styleOverrides: {
       root: {
-        borderRadius: '8px', // Small shape
+        borderRadius: '12px',
+        backdropFilter: 'blur(4px)',
       },
     },
   },
   MuiDialog: {
     styleOverrides: {
       paper: {
-        borderRadius: '28px', // Extra large shape
+        borderRadius: '28px',
+        backdropFilter: 'blur(20px)',
+        backgroundColor: 'rgba(30, 30, 30, 0.8)', // Slightly more opaque for dialogs
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+      },
+    },
+  },
+  MuiMenu: {
+    styleOverrides: {
+      paper: {
+        borderRadius: '16px',
+        backdropFilter: 'blur(16px)',
+        backgroundColor: 'rgba(30, 30, 30, 0.8)',
       },
     },
   },
