@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import Login from "@/components/Login";
 import LogoutButton from "@/components/LogoutButton";
 import BusTimings from "@/components/BusTimings";
-import { busRoutes, Route } from "@/data/routes";
+import { busRoutes } from "@/data/routes";
 import DynamicMap from "@/components/DynamicMap";
 import Footer from "@/components/Footer";
 import LiquidBackground from "@/components/LiquidBackground";
