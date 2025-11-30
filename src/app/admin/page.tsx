@@ -5,7 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { Route } from "@/components/BusTimings";
+import { Route } from "@/data/routes";
 
 const ADMIN_EMAIL = "aamir.p@gmail.com"; // Replace with your admin email
 

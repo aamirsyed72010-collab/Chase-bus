@@ -1,23 +1,13 @@
 "use client";
 
-import { Card, CardContent, Typography, Grid, CircularProgress, Box, Stack, Divider, IconButton } from '@mui/material';
+import { CardContent, Typography, Grid, CircularProgress, Box, Stack, Divider, IconButton } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-export interface Route {
-    id: string;
-    routeName: string;
-    from: string;
-    to: string;
-    timings: string[];
-    stops?: string[];
-    busType?: string;
-    eta?: string;
-    path?: [number, number][];
-    color?: string;
-}
+import { Route } from '@/data/routes';
+import LiquidCard from './LiquidCard';
 
 interface BusTimingsProps {
     searchQuery: string;
@@ -103,9 +93,9 @@ export default function BusTimings({ searchQuery, allRoutes }: BusTimingsProps) 
                 {t('busTimingsForBhuvanagiri')}
             </Typography>
             <Grid container spacing={3}>
-                {filteredRoutes.map((route) => (
+                {filteredRoutes.map((route, index) => (
                     <Grid size={{ xs: 12, sm: 6, md: 4 }} key={route.id}>
-                        <Card>
+                        <LiquidCard delay={index * 0.1}>
                             <CardContent>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Typography variant="h6" component="h3" gutterBottom>
@@ -143,7 +133,7 @@ export default function BusTimings({ searchQuery, allRoutes }: BusTimingsProps) 
                                     )}
                                 </Stack>
                             </CardContent>
-                        </Card>
+                        </LiquidCard>
                     </Grid>
                 ))}
             </Grid>
