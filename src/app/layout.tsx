@@ -33,6 +33,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} antialiased`}
+        suppressHydrationWarning
       >
         <ThemeContextProvider>
           <I18nextProvider i18n={i18n}>

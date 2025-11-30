@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { Route } from "@/data/routes";
-
-const ADMIN_EMAIL = "aamir.p@gmail.com"; // Replace with your admin email
+import { ADMIN_EMAIL } from "@/config/constants";
 
 export default function Admin() {
   const { t } = useTranslation();

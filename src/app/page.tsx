@@ -30,6 +30,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useState } from "react";
+import { ADMIN_EMAIL } from "@/config/constants";
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -100,9 +101,11 @@ export default function Home() {
                 <IconButton color="inherit" onClick={handleSendNotification}>
                   <NotificationsIcon />
                 </IconButton>
-                <Button color="inherit" component={Link} href="/admin" sx={{ ml: 1 }}>
-                  {t('admin')}
-                </Button>
+                {user.email === ADMIN_EMAIL && (
+                  <Button color="inherit" component={Link} href="/admin" sx={{ ml: 1 }}>
+                    {t('admin')}
+                  </Button>
+                )}
                 <Box sx={{ ml: 1 }}>
                   <LogoutButton />
                 </Box>

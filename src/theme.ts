@@ -90,54 +90,84 @@ export const lightPalette: PaletteOptions = {
 
 export const typography = {
   fontFamily: [
+    'Inter',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
     'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
     'sans-serif',
   ].join(','),
+  // Display styles - for hero sections
   h1: {
-    fontSize: '3.5rem', // Display Large
-    fontWeight: 400,
-    lineHeight: 1.125,
+    fontSize: '3.5rem', // 56px
+    fontWeight: 700,
+    lineHeight: 1.1,
+    letterSpacing: '-0.02em', // Tighter for large text
   },
   h2: {
-    fontSize: '2.8rem', // Display Medium
-    fontWeight: 400,
-    lineHeight: 1.2,
+    fontSize: '2.75rem', // 44px
+    fontWeight: 700,
+    lineHeight: 1.15,
+    letterSpacing: '-0.015em',
   },
   h3: {
-    fontSize: '2.25rem', // Display Small
-    fontWeight: 400,
-    lineHeight: 1.22,
+    fontSize: '2.125rem', // 34px
+    fontWeight: 600,
+    lineHeight: 1.2,
+    letterSpacing: '-0.01em',
   },
+  // Headline styles - for section titles
   h4: {
-    fontSize: '2rem', // Headline Large
-    fontWeight: 400,
+    fontSize: '1.75rem', // 28px
+    fontWeight: 600,
     lineHeight: 1.25,
+    letterSpacing: '-0.005em',
   },
   h5: {
-    fontSize: '1.75rem', // Headline Medium
-    fontWeight: 400,
-    lineHeight: 1.28,
+    fontSize: '1.5rem', // 24px
+    fontWeight: 600,
+    lineHeight: 1.3,
+    letterSpacing: '0em',
   },
   h6: {
-    fontSize: '1.375rem', // Headline Small
-    fontWeight: 500,
-    lineHeight: 1.36,
+    fontSize: '1.25rem', // 20px
+    fontWeight: 600,
+    lineHeight: 1.35,
+    letterSpacing: '0.005em',
   },
+  // Body styles
   body1: {
-    fontSize: '1rem', // Body Large
-    lineHeight: 1.5,
-    letterSpacing: '0.03125em',
+    fontSize: '1rem', // 16px
+    fontWeight: 400,
+    lineHeight: 1.6,
+    letterSpacing: '0.01em',
   },
   body2: {
-    fontSize: '0.875rem', // Body Medium
-    lineHeight: 1.43,
-    letterSpacing: '0.015625em',
+    fontSize: '0.875rem', // 14px
+    fontWeight: 400,
+    lineHeight: 1.5,
+    letterSpacing: '0.015em',
   },
+  // Button and UI elements
   button: {
-    textTransform: 'none', // No uppercase for buttons in MD3
+    fontSize: '0.9375rem', // 15px
+    fontWeight: 600,
+    lineHeight: 1.4,
+    letterSpacing: '0.02em',
+    textTransform: 'none', // No uppercase for modern feel
+  },
+  caption: {
+    fontSize: '0.75rem', // 12px
     fontWeight: 500,
+    lineHeight: 1.4,
+    letterSpacing: '0.03em',
+  },
+  overline: {
+    fontSize: '0.75rem', // 12px
+    fontWeight: 600,
+    lineHeight: 1.4,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
   },
 };
 
@@ -157,35 +187,47 @@ export const components = {
   MuiButton: {
     styleOverrides: {
       root: {
-        borderRadius: '24px', // Pill shape
-        padding: '10px 24px',
+        borderRadius: '12px',
+        padding: '10px 20px',
         textTransform: 'none',
         fontWeight: 600,
+        fontSize: '0.9375rem',
+        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
       },
       contained: {
-        boxShadow: '0 4px 14px 0 rgba(0,0,0,0.1)',
+        boxShadow: '0 2px 8px 0 rgba(0,0,0,0.12)',
         '&:hover': {
-          boxShadow: '0 6px 20px rgba(0,0,0,0.23)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.2)',
           transform: 'translateY(-1px)',
         },
-        transition: 'all 0.2s ease-in-out',
+        '&:active': {
+          transform: 'translateY(0)',
+        },
+      },
+      outlined: {
+        borderWidth: '1.5px',
+        '&:hover': {
+          borderWidth: '1.5px',
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        },
       },
     },
   },
   MuiCard: {
     styleOverrides: {
       root: {
-        borderRadius: '24px',
-        backdropFilter: 'blur(16px)',
-        backgroundColor: 'rgba(255, 255, 255, 0.05)', // Glassy
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '20px',
+        backdropFilter: 'blur(20px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.06)',
+        boxShadow: '0 4px 24px 0 rgba(31, 38, 135, 0.08)',
+        border: '1px solid rgba(255, 255, 255, 0.12)',
         backgroundImage: 'none',
-        transition: 'all 0.3s ease-in-out',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-          transform: 'translateY(-5px)',
-          boxShadow: '0 12px 40px 0 rgba(31, 38, 135, 0.15)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
+          transform: 'translateY(-4px)',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.16)',
+          border: '1px solid rgba(255, 255, 255, 0.18)',
+          backgroundColor: 'rgba(255, 255, 255, 0.08)',
         },
       },
     },
