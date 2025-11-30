@@ -11,35 +11,35 @@ export const darkPalette: PaletteOptions = {
     main: '#D0BCFF',
     light: '#E8DEF8',
     dark: '#381E72',
-    contrastText: '#381E72',
+    contrastText: '#21005D',
   },
   secondary: {
     main: '#CCC2DC',
     light: '#E8DEF8',
     dark: '#332D41',
-    contrastText: '#332D41',
+    contrastText: '#1D192B',
   },
   tertiary: {
     main: '#EFB8C8',
     light: '#FFD8E4',
     dark: '#492532',
-    contrastText: '#492532',
+    contrastText: '#31111D',
   },
   error: {
     main: '#F2B8B5',
     light: '#F9DEDC',
     dark: '#601410',
-    contrastText: '#601410',
+    contrastText: '#410E0B',
   },
   background: {
-    default: '#141218',
-    paper: '#1D1B20',
+    default: '#0D0C10', // Darker for better contrast
+    paper: '#1A1820', // Surface container
   },
   text: {
     primary: '#E6E1E5',
     secondary: '#CAC4D0',
   },
-  divider: '#49454F',
+  divider: 'rgba(202, 196, 208, 0.12)',
 };
 
 declare module '@mui/material/styles' {

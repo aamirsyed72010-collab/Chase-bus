@@ -88,15 +88,15 @@ export default function BusTimings({ searchQuery, allRoutes }: BusTimingsProps) 
     }
 
     return (
-        <Box sx={{ p: 3 }}>
-            <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
+        <Box sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
+            <Typography variant="h4" component="h2" sx={{ mb: 4, fontWeight: 600 }}>
                 {t('busTimingsForBhuvanagiri')}
             </Typography>
             <Grid container spacing={3}>
                 {filteredRoutes.map((route, index) => (
                     <Grid size={{ xs: 12, sm: 6, md: 4 }} key={route.id}>
-                        <LiquidCard delay={index * 0.1}>
-                            <CardContent>
+                        <LiquidCard delay={index * 0.1} elevation={2}>
+                            <CardContent sx={{ p: 3 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <Typography variant="h6" component="h3" gutterBottom>
                                         {route.routeName}: {route.from} to {route.to}
