@@ -90,7 +90,8 @@ export const lightPalette: PaletteOptions = {
 
 export const typography = {
   fontFamily: [
-    'Inter',
+    'var(--font-outfit)', // Use the CSS variable
+    'Outfit',
     '-apple-system',
     'BlinkMacSystemFont',
     '"Segoe UI"',
@@ -216,18 +217,45 @@ export const components = {
   MuiCard: {
     styleOverrides: {
       root: {
-        borderRadius: '20px',
-        backdropFilter: 'blur(20px)',
-        backgroundColor: 'rgba(255, 255, 255, 0.06)',
-        boxShadow: '0 4px 24px 0 rgba(31, 38, 135, 0.08)',
-        border: '1px solid rgba(255, 255, 255, 0.12)',
-        backgroundImage: 'none',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        borderRadius: '24px',
+        backgroundColor: 'rgba(255, 255, 255, 0.03)',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        backdropFilter: 'blur(24px)',
+        transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+        position: 'relative' as const,
+        overflow: 'hidden',
+        '&::before': { // Noise texture
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          opacity: 0.02,
+          pointerEvents: 'none',
+          zIndex: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        },
+        '&::after': { // Specular highlight
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+          zIndex: 1,
+          background: 'linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 40%, transparent 100%)',
+        },
         '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.16)',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
-          backgroundColor: 'rgba(255, 255, 255, 0.08)',
+          transform: 'translateY(-4px) scale(1.01)',
+          boxShadow: '0 12px 48px 0 rgba(0, 0, 0, 0.12)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+          '&::after': {
+             background: 'linear-gradient(125deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 40%, transparent 100%)',
+          }
         },
       },
     },
@@ -236,23 +264,31 @@ export const components = {
     styleOverrides: {
       root: {
         backgroundImage: 'none',
-        backdropFilter: 'blur(16px)',
-        backgroundColor: 'rgba(255, 255, 255, 0.05)', // Glassy
+        backdropFilter: 'blur(20px)',
+        backgroundColor: 'rgba(255, 255, 255, 0.03)',
         border: '1px solid rgba(255, 255, 255, 0.05)',
         transition: 'all 0.3s ease-in-out',
+        position: 'relative' as const,
+        overflow: 'hidden',
+        '&::before': { // Noise texture
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          opacity: 0.02,
+          pointerEvents: 'none',
+          zIndex: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        },
       },
       rounded: {
         borderRadius: '24px',
       },
-      elevation1: {
-        boxShadow: '0 4px 16px 0 rgba(31, 38, 135, 0.05)',
-      },
-      elevation2: {
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
-      },
-      elevation3: {
-        boxShadow: '0 12px 48px 0 rgba(31, 38, 135, 0.1)',
-      },
+      elevation1: { boxShadow: '0 4px 16px 0 rgba(0, 0, 0, 0.05)' },
+      elevation2: { boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.07)' },
+      elevation3: { boxShadow: '0 12px 48px 0 rgba(0, 0, 0, 0.1)' },
     },
   },
   MuiTextField: {

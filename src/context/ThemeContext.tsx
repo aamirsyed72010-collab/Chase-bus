@@ -21,6 +21,23 @@ interface ThemeContextProviderProps {
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   const [mode, setMode] = useState<PaletteMode>('dark'); // Default to dark mode
+  const [mounted, setMounted] = useState(false);
+
+  // Load theme from localStorage on mount
+  React.useEffect(() => {
+    const savedMode = localStorage.getItem('theme-mode') as PaletteMode | null;
+    if (savedMode && (savedMode === 'light' || savedMode === 'dark')) {
+      setMode(savedMode);
+    }
+    setMounted(true);
+  }, []);
+
+  // Save theme to localStorage when it changes
+  React.useEffect(() => {
+    if (mounted) {
+      localStorage.setItem('theme-mode', mode);
+    }
+  }, [mode, mounted]);
 
   const toggleColorMode = React.useCallback(() => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));

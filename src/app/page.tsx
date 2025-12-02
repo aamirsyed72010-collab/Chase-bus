@@ -20,9 +20,18 @@ import {
   IconButton,
   TextField,
   Paper,
+  Autocomplete,
+  Chip,
+  Stack,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from "@mui/material";
 import ClientOnly from "@/components/ClientOnly";
 import Link from "next/link";
+import RoutePlanner from "@/components/RoutePlanner";
 import { useTranslation } from 'react-i18next';
 import { useThemeContext } from "@/context/ThemeContext";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
@@ -38,6 +47,8 @@ export default function Home() {
   const { toggleColorMode, mode } = useThemeContext();
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedBusTypes, setSelectedBusTypes] = useState<string[]>(['All']);
+  const [sortBy, setSortBy] = useState<'eta' | 'name' | 'distance'>('name');
 
   // Route data imported from @/data/routes
 
@@ -56,10 +67,6 @@ export default function Home() {
       console.error("Geolocation is not supported by this browser.");
       // Optionally, show a snackbar or alert to the user
     }
-  };
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
   };
 
   const handleSendNotification = () => {
@@ -106,6 +113,9 @@ export default function Home() {
                     {t('admin')}
                   </Button>
                 )}
+                <Button color="inherit" component={Link} href="/profile" sx={{ ml: 1 }}>
+                  Profile
+                </Button>
                 <Box sx={{ ml: 1 }}>
                   <LogoutButton />
                 </Box>
@@ -122,20 +132,94 @@ export default function Home() {
                 </Typography>
               </Grid>
               <Grid size={{ xs: 12 }} sx={{ mb: 2 }}>
-                <TextField
-                  fullWidth
-                  label={t('searchRoutes')}
-                  variant="outlined"
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  sx={{ 
-                    '& .MuiOutlinedInput-root': {
-                      borderRadius: '16px',
-                      bgcolor: 'background.paper',
-                    }
-                  }}
-                />
+              <Autocomplete
+                freeSolo
+                options={busRoutes.map(route => ({
+                  label: `${route.routeName}: ${route.from} → ${route.to}`,
+                  value: route.routeName,
+                  route: route
+                }))}
+                value={searchQuery}
+                onInputChange={(_, newValue) => setSearchQuery(newValue || '')}
+                onChange={(_, option) => {
+                  if (option && typeof option !== 'string') {
+                    setSearchQuery(option.value);
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    fullWidth
+                    label={t('searchRoutes')}
+                    variant="outlined"
+                    sx={{ 
+                      '& .MuiOutlinedInput-root': {
+                        borderRadius: '16px',
+                        bgcolor: 'background.paper',
+                      }
+                    }}
+                  />
+                )}
+                renderOption={(props, option) => (
+                  <Box component="li" {...props} key={option.route.id}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                      <Typography variant="body1">{option.route.routeName}</Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {option.route.from} → {option.route.to} • {option.route.busType}
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+              />
               </Grid>
+              
+              {/* Filters and Sort */}
+              <Grid size={{ xs: 12 }} sx={{ mb: 3 }}>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center" justifyContent="space-between">
+                  <Stack direction="row" spacing={1} sx={{ overflowX: 'auto', pb: 1, maxWidth: '100%' }}>
+                    {['All', 'Express', 'Town Bus', 'Deluxe'].map((type) => (
+                      <Chip
+                        key={type}
+                        label={type}
+                        onClick={() => {
+                          if (type === 'All') {
+                            setSelectedBusTypes(['All']);
+                          } else {
+                            const newTypes = selectedBusTypes.includes('All') 
+                              ? [type] 
+                              : selectedBusTypes.includes(type)
+                                ? selectedBusTypes.filter(t => t !== type)
+                                : [...selectedBusTypes, type];
+                            
+                            setSelectedBusTypes(newTypes.length ? newTypes : ['All']);
+                          }
+                        }}
+                        color={selectedBusTypes.includes(type) ? "primary" : "default"}
+                        variant={selectedBusTypes.includes(type) ? "filled" : "outlined"}
+                        sx={{ borderRadius: '12px' }}
+                      />
+                    ))}
+                  </Stack>
+
+                  <FormControl size="small" sx={{ minWidth: 120 }}>
+                    <InputLabel>{t('sortBy')}</InputLabel>
+                    <Select
+                      value={sortBy}
+                      label={t('sortBy')}
+                      onChange={(e: SelectChangeEvent) => setSortBy(e.target.value as 'eta' | 'name' | 'distance')}
+                      sx={{ borderRadius: '12px', bgcolor: 'background.paper' }}
+                    >
+                      <MenuItem value="eta">{t('eta')}</MenuItem>
+                      <MenuItem value="name">{t('name')}</MenuItem>
+                      <MenuItem value="distance">{t('distance')}</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Stack>
+                <Box sx={{ mt: 2 }}>
+                <RoutePlanner />
+              </Box>
+              </Grid>
+
               <Grid size={{ xs: 12 }}>
                 <Paper 
                   elevation={0} 
@@ -152,7 +236,13 @@ export default function Home() {
                 </Paper>
               </Grid>
               <Grid size={{ xs: 12 }}>
-                <BusTimings searchQuery={searchQuery} allRoutes={busRoutes} />
+                <BusTimings 
+                  searchQuery={searchQuery} 
+                  allRoutes={busRoutes}
+                  selectedBusTypes={selectedBusTypes}
+                  sortBy={sortBy}
+                  userLocation={userLocation}
+                />
               </Grid>
               {/* Google AdSense Ad Unit Placeholder */}
               <Grid size={{ xs: 12 }} sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>

@@ -1,10 +1,11 @@
-"use client";
-
+import { useState } from 'react';
 import { Box, Container, Typography, Link } from '@mui/material';
-// import { useTranslation } from 'react-i18next';
+import FeedbackDialog from './FeedbackDialog';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
-  // const { t } = useTranslation(); // t is currently unused
+  const { t } = useTranslation();
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   return (
     <Box component="footer" sx={{ 
@@ -21,18 +22,25 @@ export default function Footer() {
         </Typography>
         <Typography variant="body2" color="text.secondary" align="center">
           {'Copyright © '}
-          <Link color="inherit" href="https://your-website.com/">
-            Your Website
+          <Link color="inherit" href="/">
+            Bus Tracker
           </Link>{' '}
           {new Date().getFullYear()}
           {'.'}
         </Typography>
         <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 1 }}>
-          <Link href="mailto:aamir.p@gmail.com" color="inherit">
-            Contact Admin: aamir.p@gmail.com
+          <Link 
+            component="button" 
+            variant="body2" 
+            color="inherit" 
+            onClick={() => setFeedbackOpen(true)}
+            sx={{ textDecoration: 'underline', cursor: 'pointer' }}
+          >
+            {t('submitFeedback', { defaultValue: 'Submit Feedback' })}
           </Link>
         </Typography>
       </Container>
+      <FeedbackDialog open={feedbackOpen} onClose={() => setFeedbackOpen(false)} />
     </Box>
   );
 }
