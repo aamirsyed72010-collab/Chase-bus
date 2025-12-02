@@ -15,34 +15,65 @@ export const busRoutes: Route[] = [
   {
     id: 'route1',
     path: [
-      [11.4531391, 79.6515867], // Bhuvanagiri
-      [11.4600000, 79.6600000],
-      [11.4700000, 79.6700000],
-      [11.4800000, 79.6800000],
+      [11.4531, 79.6516], // Bhuvanagiri
+      [11.4350, 79.6650], // Keerapalayam
+      [11.3996, 79.6936], // Chidambaram
     ],
-    color: 'red',
-    routeName: 'Route A',
+    color: '#FF5722',
+    routeName: 'Route 1: Chidambaram Shuttle',
     from: 'Bhuvanagiri',
-    to: 'City Center',
-    eta: '10 min',
-    timings: ['08:00 AM', '10:00 AM', '01:00 PM'],
-    stops: ['Stop 1', 'Stop 2', 'Stop 3'],
-    busType: 'Express',
+    to: 'Chidambaram',
+    eta: '15 min',
+    timings: ['04:25 AM', '05:00 AM', '06:30 AM', '08:00 AM', '09:15 AM', '10:30 AM', '01:00 PM', '04:00 PM', '06:00 PM', '09:00 PM'],
+    stops: ['Bhuvanagiri Bus Stand', 'Keerapalayam', 'Chidambaram Bus Stand'],
+    busType: 'Town Bus',
   },
   {
     id: 'route2',
     path: [
-      [11.4500000, 79.6500000],
-      [11.4400000, 79.6400000],
-      [11.4300000, 79.6300000],
+      [11.4531, 79.6516], // Bhuvanagiri
+      [11.4285, 79.5308], // Sethiathope
+      [11.5196, 79.3247], // Virudhachalam
     ],
-    color: 'blue',
-    routeName: 'Route B',
+    color: '#2196F3',
+    routeName: 'Route 2: Virudhachalam Express',
     from: 'Bhuvanagiri',
-    to: 'Industrial Area',
-    eta: '25 min',
-    timings: ['09:30 AM', '12:30 PM', '04:30 PM'],
-    stops: ['Stop A', 'Stop B'],
+    to: 'Virudhachalam',
+    eta: '50 min',
+    timings: ['06:00 AM', '08:30 AM', '11:00 AM', '02:00 PM', '05:30 PM', '09:30 PM'],
+    stops: ['Bhuvanagiri', 'Sethiathope Cross', 'Virudhachalam Bus Stand'],
+    busType: 'Express',
+  },
+  {
+    id: 'route3',
+    path: [
+      [11.4531, 79.6516], // Bhuvanagiri
+      [11.5034, 79.7617], // Parangipettai
+      [11.7480, 79.7714], // Cuddalore
+    ],
+    color: '#4CAF50',
+    routeName: 'Route 3: Cuddalore Connector',
+    from: 'Bhuvanagiri',
+    to: 'Cuddalore',
+    eta: '45 min',
+    timings: ['05:30 AM', '07:00 AM', '09:00 AM', '12:00 PM', '03:00 PM', '06:00 PM', '08:30 PM'],
+    stops: ['Bhuvanagiri', 'Parangipettai', 'Cuddalore OT', 'Cuddalore New Town'],
+    busType: 'Deluxe',
+  },
+  {
+    id: 'route4',
+    path: [
+      [11.4531, 79.6516], // Bhuvanagiri
+      [11.5581, 79.5525], // Vadalur
+      [11.5983, 79.4864], // Neyveli
+    ],
+    color: '#9C27B0',
+    routeName: 'Route 4: Neyveli Link',
+    from: 'Bhuvanagiri',
+    to: 'Neyveli',
+    eta: '35 min',
+    timings: ['06:15 AM', '07:45 AM', '09:30 AM', '11:30 AM', '02:30 PM', '05:00 PM', '07:30 PM'],
+    stops: ['Bhuvanagiri', 'Vadalur', 'Neyveli Arch', 'Neyveli Township'],
     busType: 'Town Bus',
   },
 ];

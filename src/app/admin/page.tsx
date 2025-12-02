@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { Route } from "@/data/routes";
 import { ADMIN_EMAIL } from "@/config/constants";
 
+import AdminAnalytics from "@/components/AdminAnalytics";
+
 export default function Admin() {
   const { t } = useTranslation();
   const { user, loading } = useAuth();
@@ -118,6 +120,10 @@ export default function Admin() {
         <Typography variant="h4" component="h1" gutterBottom>
           {t('adminSettings')}
         </Typography>
+        
+        {/* Analytics Section */}
+        <AdminAnalytics routes={routes} />
+
         <Button variant="contained" color="primary" onClick={handleClickOpen} sx={{ mb: 2 }}>
           {t('addNewRoute')}
         </Button>
