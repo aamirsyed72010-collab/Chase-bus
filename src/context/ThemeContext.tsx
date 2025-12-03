@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useMemo, ReactNode } from 'react';
 import { createTheme, ThemeProvider as MuiThemeProvider, PaletteMode } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { darkPalette, lightPalette, typography, components } from '@/theme'; // Import palettes, typography, and components
+import { darkPalette, lightPalette, typography, getComponents } from '@/theme'; // Import palettes, typography, and getComponents
 
 // Define the shape of the context value
 interface ThemeContextType {
@@ -51,7 +51,7 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
           ...(mode === 'light' ? lightPalette : darkPalette), // Use imported palettes
         },
         typography, // Use imported typography
-        components, // Use imported components
+        components: getComponents(mode), // Use getComponents function
       }),
     [mode],
   );

@@ -3,7 +3,7 @@
 // Material Design 3 (Material You) Color Tokens
 // Generated or approximated for a purple-based theme
 
-import { PaletteOptions } from '@mui/material/styles';
+import { PaletteOptions, PaletteMode } from '@mui/material/styles';
 
 export const darkPalette: PaletteOptions = {
   mode: 'dark',
@@ -172,16 +172,16 @@ export const typography = {
   },
 };
 
-export const components = {
+export const getComponents = (mode: PaletteMode) => ({
   MuiAppBar: {
     styleOverrides: {
       root: {
-        backgroundColor: 'rgba(255, 255, 255, 0.01)', // Ultra transparent
+        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.01)' : 'rgba(255, 255, 255, 0.7)',
         backdropFilter: 'blur(12px)',
-        color: 'inherit',
+        color: mode === 'dark' ? 'inherit' : '#1C1B1F',
         boxShadow: 'none',
         backgroundImage: 'none',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        borderBottom: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.05)',
       },
     },
   },
@@ -190,7 +190,7 @@ export const components = {
       root: {
         borderRadius: '12px',
         padding: '10px 20px',
-        textTransform: 'none',
+        textTransform: 'none' as const,
         fontWeight: 600,
         fontSize: '0.9375rem',
         transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -209,7 +209,7 @@ export const components = {
         borderWidth: '1.5px',
         '&:hover': {
           borderWidth: '1.5px',
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
         },
       },
     },
@@ -218,9 +218,9 @@ export const components = {
     styleOverrides: {
       root: {
         borderRadius: '24px',
-        backgroundColor: 'rgba(255, 255, 255, 0.03)',
-        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.6)',
+        boxShadow: mode === 'dark' ? '0 8px 32px 0 rgba(0, 0, 0, 0.08)' : '0 8px 32px 0 rgba(0, 0, 0, 0.05)',
+        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(255, 255, 255, 0.4)',
         backdropFilter: 'blur(24px)',
         transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
         position: 'relative' as const,
@@ -232,7 +232,7 @@ export const components = {
           left: 0,
           width: '100%',
           height: '100%',
-          opacity: 0.02,
+          opacity: mode === 'dark' ? 0.02 : 0.015,
           pointerEvents: 'none',
           zIndex: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
@@ -246,15 +246,19 @@ export const components = {
           height: '100%',
           pointerEvents: 'none',
           zIndex: 1,
-          background: 'linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 40%, transparent 100%)',
+          background: mode === 'dark' 
+            ? 'linear-gradient(125deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 40%, transparent 100%)'
+            : 'linear-gradient(125deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, transparent 100%)',
         },
         '&:hover': {
           transform: 'translateY(-4px) scale(1.01)',
           boxShadow: '0 12px 48px 0 rgba(0, 0, 0, 0.12)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+          border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid rgba(255, 255, 255, 0.8)',
+          backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(255, 255, 255, 0.8)',
           '&::after': {
-             background: 'linear-gradient(125deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 40%, transparent 100%)',
+             background: mode === 'dark'
+              ? 'linear-gradient(125deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 40%, transparent 100%)'
+              : 'linear-gradient(125deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 40%, transparent 100%)',
           }
         },
       },
@@ -265,8 +269,8 @@ export const components = {
       root: {
         backgroundImage: 'none',
         backdropFilter: 'blur(20px)',
-        backgroundColor: 'rgba(255, 255, 255, 0.03)',
-        border: '1px solid rgba(255, 255, 255, 0.05)',
+        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.6)',
+        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid rgba(255, 255, 255, 0.4)',
         transition: 'all 0.3s ease-in-out',
         position: 'relative' as const,
         overflow: 'hidden',
@@ -277,7 +281,7 @@ export const components = {
           left: 0,
           width: '100%',
           height: '100%',
-          opacity: 0.02,
+          opacity: mode === 'dark' ? 0.02 : 0.015,
           pointerEvents: 'none',
           zIndex: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
@@ -296,13 +300,38 @@ export const components = {
       root: {
         '& .MuiOutlinedInput-root': {
           borderRadius: '16px',
-          backgroundColor: 'rgba(255, 255, 255, 0.03)',
+          backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.03)',
           '& fieldset': {
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
           },
           '&:hover fieldset': {
-            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)',
           },
+          '&.Mui-focused fieldset': {
+            borderColor: mode === 'dark' ? '#D0BCFF' : '#6750A4',
+          },
+        },
+        '& .MuiInputLabel-root': {
+          color: mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.6)',
+        },
+      },
+    },
+  },
+  MuiAutocomplete: {
+    styleOverrides: {
+      paper: {
+        backgroundColor: mode === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(20px)',
+        borderRadius: '16px',
+        marginTop: '8px',
+        boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.1)',
+      },
+      option: {
+        '&[aria-selected="true"]': {
+          backgroundColor: mode === 'dark' ? 'rgba(208, 188, 255, 0.16)' : 'rgba(103, 80, 164, 0.08)',
+        },
+        '&:hover': {
+          backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
         },
       },
     },
@@ -312,6 +341,7 @@ export const components = {
       root: {
         borderRadius: '12px',
         backdropFilter: 'blur(4px)',
+        backgroundColor: mode === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)',
       },
     },
   },
@@ -320,8 +350,9 @@ export const components = {
       paper: {
         borderRadius: '28px',
         backdropFilter: 'blur(20px)',
-        backgroundColor: 'rgba(30, 30, 30, 0.8)', // Slightly more opaque for dialogs
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+        backgroundColor: mode === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(255, 255, 255, 0.9)',
+        border: mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(255, 255, 255, 0.5)',
+        boxShadow: '0 24px 48px rgba(0, 0, 0, 0.2)',
       },
     },
   },
@@ -330,8 +361,8 @@ export const components = {
       paper: {
         borderRadius: '16px',
         backdropFilter: 'blur(16px)',
-        backgroundColor: 'rgba(30, 30, 30, 0.8)',
+        backgroundColor: mode === 'dark' ? 'rgba(30, 30, 30, 0.9)' : 'rgba(255, 255, 255, 0.9)',
       },
     },
   },
-};
+});

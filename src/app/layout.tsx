@@ -7,10 +7,12 @@ import { I18nextProvider } from 'react-i18next';
 import i18n from '@/i18n/config';
 import { AuthProvider } from "@/context/AuthContext";
 import { ThemeContextProvider } from "@/context/ThemeContext";
+
 import { UserPreferencesProvider } from "@/context/UserPreferencesContext";
 import Script from "next/script";
 import LiquidBackground from "@/components/LiquidBackground";
 import OfflineIndicator from "@/components/OfflineIndicator";
+import CookieConsent from "@/components/CookieConsent";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -28,7 +30,7 @@ export default function RootLayout({
         {/* Google AdSense Script */}
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_PUBLISHER_ID"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8976924344582347"
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
@@ -61,6 +63,7 @@ export default function RootLayout({
                 <LiquidBackground>
                   {children}
                   <OfflineIndicator />
+                  <CookieConsent />
                 </LiquidBackground>
               </UserPreferencesProvider>
             </AuthProvider>
