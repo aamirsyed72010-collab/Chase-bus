@@ -14,6 +14,7 @@ export default function LiquidBackground({ children }: LiquidBackgroundProps) {
 
   return (
     <Box
+      suppressHydrationWarning
       sx={{
         position: "relative",
         minHeight: "100vh",
@@ -29,6 +30,7 @@ export default function LiquidBackground({ children }: LiquidBackgroundProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
+        suppressHydrationWarning
         sx={{
           position: "fixed",
           top: 0,
@@ -64,6 +66,7 @@ export default function LiquidBackground({ children }: LiquidBackgroundProps) {
 
       {/* Glass Overlay for depth */}
       <Box
+        suppressHydrationWarning
         sx={{
           position: "relative",
           zIndex: 1,
