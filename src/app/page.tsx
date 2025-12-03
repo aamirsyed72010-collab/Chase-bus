@@ -33,6 +33,7 @@ import ClientOnly from "@/components/ClientOnly";
 import Link from "next/link";
 import RoutePlanner from "@/components/RoutePlanner";
 import { useTranslation } from 'react-i18next';
+import '@/i18n/config'; // Ensure i18n is initialized
 import { useThemeContext } from "@/context/ThemeContext";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';

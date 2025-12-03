@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Box, Paper, Typography, TextField, Button, Stepper, Step, StepLabel, StepContent, Autocomplete, IconButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import '@/i18n/config'; // Ensure i18n is initialized
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
