@@ -8,25 +8,14 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import { busRoutes } from '@/data/routes';
+import { findAlternativeRoutes, RouteOption } from '@/utils/routeAlgorithms';
+import RouteComparison from './RouteComparison';
 
 export default function RoutePlanner() {
   const { t } = useTranslation();
   const [stops, setStops] = useState<string[]>(['', '']);
   const [activeStep, setActiveStep] = useState(0);
-  interface RouteSegment {
-    from: string;
-    to: string;
-    bus: string;
-    duration: string;
-  }
-
-  interface RoutePlan {
-    totalDuration: string;
-    totalDistance: string;
-    segments: RouteSegment[];
-  }
-
-  const [plannedRoute, setPlannedRoute] = useState<RoutePlan | null>(null);
+  const [alternativeRoutes, setAlternativeRoutes] = useState<RouteOption[]>([]);
 
   const allStops = Array.from(new Set(busRoutes.flatMap(r => [r.from, r.to, ...(r.stops || [])])));
 
@@ -46,20 +35,20 @@ export default function RoutePlanner() {
   };
 
   const handlePlanRoute = () => {
-    // Mock route planning logic
-    // In a real app, this would use a graph algorithm (Dijkstra/A*) to find the best path
-    const mockPlan: RoutePlan = {
-      totalDuration: '45 min',
-      totalDistance: '12 km',
-      segments: stops.slice(0, -1).map((stop, i) => ({
-        from: stop,
-        to: stops[i + 1],
-        bus: 'Bus ' + (Math.floor(Math.random() * 100) + 1),
-        duration: '15 min'
-      }))
-    };
-    setPlannedRoute(mockPlan);
+    // For now, support only direct origin-destination (first and last stop)
+    const origin = stops[0];
+    const destination = stops[stops.length - 1];
+    
+    if (!origin || !destination) return;
+    
+    const routes = findAlternativeRoutes(busRoutes, origin, destination);
+    setAlternativeRoutes(routes);
     setActiveStep(1);
+  };
+
+  const handleSelectRoute = (route: RouteOption) => {
+    console.log('Selected route:', route);
+    // Future: Add to favorites, show on map, etc.
   };
 
   return (
@@ -108,26 +97,10 @@ export default function RoutePlanner() {
         <Step>
           <StepLabel>{t('routeDetails')}</StepLabel>
           <StepContent>
-            {plannedRoute && (
-              <Box>
-                <Typography variant="subtitle1" color="primary" gutterBottom>
-                  Total: {plannedRoute.totalDuration} ({plannedRoute.totalDistance})
-                </Typography>
-                {plannedRoute.segments.map((segment, i) => (
-                  <Paper key={i} variant="outlined" sx={{ p: 2, mb: 1, bgcolor: 'rgba(0,0,0,0.02)' }}>
-                    <Typography variant="body2" fontWeight="bold">
-                      {segment.from} → {segment.to}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      Take {segment.bus} • {segment.duration}
-                    </Typography>
-                  </Paper>
-                ))}
-                <Button onClick={() => setActiveStep(0)} sx={{ mt: 1 }}>
-                  {t('modify')}
-                </Button>
-              </Box>
-            )}
+            <RouteComparison routes={alternativeRoutes} onSelectRoute={handleSelectRoute} />
+            <Button onClick={() => setActiveStep(0)} sx={{ mt: 2 }}>
+              {t('modify')}
+            </Button>
           </StepContent>
         </Step>
       </Stepper>
